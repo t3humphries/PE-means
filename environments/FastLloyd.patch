@@ -1,0 +1,32 @@
+diff --git a/configs/params.py b/configs/params.py
+index 511c0d3..49ace2e 100644
+--- a/configs/params.py
++++ b/configs/params.py
+@@ -54,6 +54,7 @@ class Params:
+     method: str = "none"
+     post: str = "none"
+     fixed: bool = True
++    linf_bound: float = 1.0
+ 
+     DEFAULT_BOUNDS = (-1, 1)
+     MAX_RETRIES = 100
+diff --git a/parties/server.py b/parties/server.py
+index 2467186..66588cb 100644
+--- a/parties/server.py
++++ b/parties/server.py
+@@ -106,13 +106,13 @@ class Server:
+         elif "gaussian" in self.params.dp:
+             # Calculate parameters for Gaussian mechanism
+             N = params.data_size
+-            delta = 1 / (N * np.log(N))
++            delta = 1 / (N ** 1.1)
+             d = params.dim
+             rho = params.rho
+ 
+             if params.method != "none":
+                 # min to ensure that the sensitivity is bounded by domain diagonal
+-                sum_sensitivity = min(2 * np.sqrt(d), params.max_dist)
++                sum_sensitivity = min(2 * params.linf_bound * np.sqrt(d), params.max_dist)
+                 sum_scale = np.sqrt(1 + np.sqrt(4 * d)) / (4 * d) ** (1 / 4)
+                 count_scale = np.sqrt(1 + np.sqrt(4 * d))
+             else:
