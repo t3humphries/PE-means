@@ -1,3 +1,6 @@
 [submodule "icml17_matlab"]
 	path = icml17_matlab
 	url = https://github.com/t3humphries/dp-clustering-icml17.git
+[submodule "FastLloyd"]
+	path = FastLloyd
+	url = https://github.com/D-Diaa/FastLloyd.git
