@@ -7,6 +7,6 @@ git submodule update --init --recursive
 
 # Add our patch to FastLloyd
 cd FastLloyd
-git apply --reverse --check ../environments/FastLloyd.patch 2>/dev/null || \
-    git apply ../environments/FastLloyd.patch
+git apply --reverse --check ../setup/FastLloyd.patch 2>/dev/null || \
+    git apply ../setup/FastLloyd.patch
 cd ..
